@@ -1,2 +1,2 @@
-MyThirdProgram.java
- MyThirdProgram
+ru/stqa/pft/sandbox/MyFirstProgram.java
+ ru.stqa.pft.sandbox.MyFirstProgram
