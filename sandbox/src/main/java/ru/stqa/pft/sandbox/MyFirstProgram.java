@@ -4,12 +4,10 @@ public class MyFirstProgram {
 
     public static void main(String[] args) {
 
-        Point P = new Point(0, 15, 7, -2);
-        System.out.println("Расстояние между точками = " + distance(P));
+        Point P = new Point(0, 3, 6, -2);
+        System.out.println("Расстояние между точками = " + P.distance());
     }
-    public static double distance (Point P){
-        return Math.sqrt((P.p3-P.p1)*(P.p3-P.p1)+(P.p4-P.p2)*(P.p4-P.p2));
-    }
+
 
 
 
