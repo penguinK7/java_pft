@@ -13,4 +13,15 @@ public class NavigationHelper extends HelperBase{
 
           click(By.linkText("groups"));
     }
+
+    public void acceptAlert(){
+        wd.switchTo().alert().accept();
+    }
+    public void goToHomePage() {
+        click(By.linkText("home"));
+    }
+    public void goToEditContact() {
+        click(By.xpath("(//img[@alt='Edit'])[2]"));
+    }
+
 }
