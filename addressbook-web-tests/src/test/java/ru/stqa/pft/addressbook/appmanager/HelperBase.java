@@ -20,9 +20,9 @@ public class HelperBase {
 
     protected void type(By locator, String text) {
         click(locator);
-        if(text != null){    //если текст в названии не равен нулю
-            String existingText =wd.findElement(locator).getAttribute("value"); //если текст существует
-            if (! text.equals(existingText)){  //если текст не равен существующему
+        if (text != null) {    //если текст в названии не равен нулю
+            String existingText = wd.findElement(locator).getAttribute("value"); //если текст существует
+            if (!text.equals(existingText)) {  //если текст не равен существующему
                 wd.findElement(locator).clear();
                 wd.findElement(locator).sendKeys(text);
             }
@@ -48,12 +48,12 @@ public class HelperBase {
     }
 
 
-    protected boolean isElementPresent(By locator){   //метод на проверку наличия или отсутствия элементов
-        try{
+    protected boolean isElementPresent(By locator) {   //метод на проверку наличия или отсутствия элементов
+        try {
             wd.findElement(locator);
-            return true; }
-        catch (NoSuchElementException ex){
-return false;
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
         }
     }
 }

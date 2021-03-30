@@ -32,7 +32,10 @@ public class NavigationHelper extends HelperBase{
         click(By.linkText("home"));
     }
     public void goToEditContact() {
-        click(By.xpath("(//img[@alt='Edit'])[2]"));
+        click(By.xpath("//img[@alt='Edit']"));
+    }
+    public void goToContactCreation() {
+        click(By.linkText("add new"));
     }
 
 }
