@@ -10,7 +10,13 @@ public class NavigationHelper extends HelperBase{
         super(wd);
     }
 
-    public void gotoGroupPage() {
+    public void gotoGroupPage()
+    {
+        if(isElementPresent(By.tagName("h1"))     //проверка что уже находишься на странице с созданием групп
+                && wd.findElement(By.tagName("h1")).getText().equals("Groups")
+                && isElementPresent(By.name("new"))){
+         return;
+        }
 
           click(By.linkText("groups"));
     }
@@ -19,6 +25,10 @@ public class NavigationHelper extends HelperBase{
         wd.switchTo().alert().accept();
     }
     public void goToHomePage() {
+          if(isElementPresent(By.id("maintable"))){  //проверка что уже находишься на нужной странице
+              return;
+          }
+
         click(By.linkText("home"));
     }
     public void goToEditContact() {
