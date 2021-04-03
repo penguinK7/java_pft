@@ -17,19 +17,18 @@ public class groupData {
         this.header = header;
         this.footer = footer;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
+
     public groupData( String name, String header, String footer) {
         this.id = 0;
         this.name = name;
         this.header = header;
         this.footer = footer;
     }
-    public int getId() {
-        return id;
+    public int getId() {        return id;
     }
-
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
