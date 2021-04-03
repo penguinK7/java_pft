@@ -1,7 +1,5 @@
 package ru.stqa.pft.addressbook.model;
 
-import java.util.Objects;
-import java.util.HashSet;
 
 public class groupData {
     private int id;
@@ -19,7 +17,7 @@ public class groupData {
     }
 
     public groupData( String name, String header, String footer) {
-        this.id = 0;
+        this.id = Integer.MAX_VALUE;
         this.name = name;
         this.header = header;
         this.footer = footer;
@@ -57,14 +55,11 @@ public class groupData {
 
         groupData groupData = (groupData) o;
 
-        if (id != groupData.id) return false;
         return name != null ? name.equals(groupData.name) : groupData.name == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return name != null ? name.hashCode() : 0;
     }
 }
