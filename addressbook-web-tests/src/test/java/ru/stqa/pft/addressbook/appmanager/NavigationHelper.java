@@ -10,7 +10,7 @@ public class NavigationHelper extends HelperBase{
         super(wd);
     }
 
-    public void gotoGroupPage()
+    public void groupPage()
     {
         if(isElementPresent(By.tagName("h1"))     //проверка что уже находишься на странице с созданием групп
                 && wd.findElement(By.tagName("h1")).getText().equals("Groups")
@@ -24,7 +24,7 @@ public class NavigationHelper extends HelperBase{
     public void acceptAlert(){
         wd.switchTo().alert().accept();
     }
-    public void goToHomePage() {
+    public void homePage() {
           if(isElementPresent(By.id("maintable"))){  //проверка что уже находишься на нужной странице
               return;
           }

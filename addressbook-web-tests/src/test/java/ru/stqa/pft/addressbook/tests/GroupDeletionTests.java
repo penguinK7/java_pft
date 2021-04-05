@@ -3,32 +3,37 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.groupData;
 
 import java.util.List;
 
 public class GroupDeletionTests extends TestBase {
-
+    @BeforeMethod
+    public void ensurePreconditions(){
+        app.goTo().groupPage();
+        if(app.group().list().size() == 0){  //создание группы, если ее не было
+            app.group().create(new groupData("test", null, null));
+        }
+    }
 
     @Test
     public void testGroupDeletion() throws Exception {
 
-        app.getNavigationHelper().gotoGroupPage();
-        if (!app.getGroupHelper().isThereAGroup()) {     //создание группы, если ее не было
-            app.getGroupHelper().createGroup(new groupData("test", null, null));
-        }
-        List<groupData> before = app.getGroupHelper().getGroupList(); //подсчет количества групп до создания
-        app.getGroupHelper().selectGroup(before.size() - 1); //выбрать последнюю группу
-        app.getGroupHelper().deleteSelectedGroups();
-        app.getGroupHelper().returnToGroupPage();
-        List<groupData> after = app.getGroupHelper().getGroupList();
-        Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(before.size() - 1); //удалили группу из списка и проверили
+        List<groupData> before = app.group().list(); //подсчет количества групп до создания
+        int index = before.size()-1;
+        app.group().delete(index);
+        List<groupData> after = app.group().list();
+        Assert.assertEquals(after.size(), before.size()-1);
+
+        before.remove(index); //удалили группу из списка и проверили
         Assert.assertEquals(before,after);
 
     }
+
+
 
 
 }
