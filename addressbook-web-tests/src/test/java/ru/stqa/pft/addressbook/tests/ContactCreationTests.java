@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.contactData;
+import ru.stqa.pft.addressbook.model.groupData;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -31,29 +32,12 @@ public class ContactCreationTests extends TestBase{
     List<contactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(before.size(), after.size() - 1);
 
+
     before.add(contact);
-
-    /*
-    исопльзование цикла для поиска максимального id:
-    int max = 0;
-    for (ContactData c : after){
-      if (c.getId() > max){
-        max = c.getId();
-      }
-    }
-    */
-    Comparator<? super contactData> byId = new Comparator<contactData>() {
-      @Override
-      public int compare(contactData o1, contactData o2) {
-        return Integer.compare(o1.getId(), o2.getId());
-      }
-    };
-
-
-    int max = after.stream().max(byId).get().getId();
-    contact.setId(max);
-    before.add(contact);
-    Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
+    Comparator<? super contactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
 
   }
 }
