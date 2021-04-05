@@ -11,7 +11,7 @@ public class ContactCreationTests extends TestBase{
 
 
 
-  @Test (enabled = false)
+  @Test ()
   public void testContactCreation() {
     List<contactData> before = app.contact().list(); //подсчет количества групп до создания
     app.goTo().goToContactCreation();

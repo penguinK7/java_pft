@@ -26,7 +26,7 @@ public class ContactModificationTests extends TestBase{
         }
     }
 
-    @Test(enabled = false)
+    @Test()
     public void ContactModification() {
 
         List<contactData> before = app.contact().list(); //подсчет количества контактов до создания
@@ -37,11 +37,8 @@ public class ContactModificationTests extends TestBase{
                 "123456",
                 "email@address.com",
                 null);
+        app.contact().modifyContact(index, contact);
 
-        app.goTo().goToEditContact(index);
-        app.contact().fillContactForm(contact, false);
-        app.contact().updateContact();
-        app.goTo().homePage();
         List<contactData> after = app.contact().list();
         Assert.assertEquals(before.size(), after.size());
 
@@ -53,6 +50,7 @@ public class ContactModificationTests extends TestBase{
         Assert.assertEquals(before, after);
 
     }
+
 
 
 

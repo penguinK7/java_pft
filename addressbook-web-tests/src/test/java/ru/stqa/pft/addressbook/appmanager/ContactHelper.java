@@ -48,7 +48,12 @@ public class ContactHelper extends HelperBase{
     public void deleteContact(){
         click(By.xpath("//input[@value='Delete']"));
     }
-
+    public void modifyContact(int index, contactData contact) {
+        goToEditContact(index);
+        fillContactForm(contact, false);
+        updateContact();
+        homePage();
+    }
     public void updateContact(){
         click(By.xpath("(//input[@name='update'])[2]"));
     }
@@ -57,14 +62,23 @@ public class ContactHelper extends HelperBase{
         fillContactForm(contact, true);
         submitContactCreation();
     }
+    public void homePage() {
+        if(isElementPresent(By.id("maintable"))){  //проверка что уже находишься на нужной странице
+            return;
+        }
 
-
+        click(By.linkText("home"));
+    }
+    public void goToEditContact(int i) {
+        click(By.xpath("//img[@alt='Edit']"));
+    }
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
+
     public List<contactData> list() {
         List<contactData> contacts = new ArrayList<contactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));

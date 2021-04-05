@@ -23,7 +23,7 @@ public class ContactDeletionTests extends TestBase{
             app.goTo().homePage();
         }
     }
-    @Test(enabled = false)
+    @Test()
     public void testContactDeletion(){
 
         List<contactData> before = app.contact().list(); //подсчет количества групп до создания
