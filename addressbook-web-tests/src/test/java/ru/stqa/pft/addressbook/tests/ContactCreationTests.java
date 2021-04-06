@@ -16,13 +16,13 @@ public class ContactCreationTests extends TestBase{
     List<contactData> before = app.contact().list(); //подсчет количества групп до создания
     app.goTo().goToContactCreation();
 
-    contactData contact = new contactData("firstName",
-
-            "lastName",
-            "address",
-            "123456",
-            "email@address.com",
-            "test");
+    contactData contact = new contactData()
+            .withFirstname("firstName")
+            .withLastname("lastName")
+            .withAddress("address")
+            .withMobile("123456")
+            .withEmail("email@address.com")
+            .withGroup("test");
     app.contact().fillContactForm(contact, true);
     app.contact().submitContactCreation();
     app.goTo().homePage();

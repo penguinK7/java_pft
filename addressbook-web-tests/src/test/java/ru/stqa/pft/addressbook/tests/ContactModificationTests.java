@@ -15,13 +15,13 @@ public class ContactModificationTests extends TestBase{
         app.goTo().homePage();
         if (app.contact().list().size() == 0){  //создание контакта, если его не было
             app.goTo().goToContactCreation();
-            app.contact().create(new contactData("firstName",
-
-                    "lastName",
-                    "address",
-                    "123456",
-                    "email@address.com",
-                    "test"));
+            app.contact().create(new contactData()
+                    .withFirstname("firstName")
+                    .withLastname("lastName")
+                    .withAddress("address")
+                    .withMobile("123456")
+                    .withEmail("email@address.com")
+                    .withGroup("test"));
             app.goTo().homePage();
         }
     }
@@ -31,12 +31,12 @@ public class ContactModificationTests extends TestBase{
 
         List<contactData> before = app.contact().list(); //подсчет количества контактов до создания
         int index = before.size()-1;
-        contactData contact = new contactData("firstName",
-                "lastName",
-                "address",
-                "123456",
-                "email@address.com",
-                null);
+        contactData contact = new contactData()
+                .withFirstname("firstName")
+                .withLastname("lastName")
+                .withAddress("address")
+                .withMobile("123456")
+                .withEmail("email@address.com");
         app.contact().modifyContact(index, contact);
 
         List<contactData> after = app.contact().list();
