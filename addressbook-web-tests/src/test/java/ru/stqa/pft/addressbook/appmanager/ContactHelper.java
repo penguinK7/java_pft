@@ -9,7 +9,9 @@ import ru.stqa.pft.addressbook.model.contactData;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase{
 
@@ -45,7 +47,7 @@ public class ContactHelper extends HelperBase{
 
     }
 
-    public void deleteContact(){
+    public void deleteSelectedContact(){
         click(By.xpath("//input[@value='Delete']"));
     }
     public void modifyContact(int index, contactData contact) {
@@ -72,6 +74,11 @@ public class ContactHelper extends HelperBase{
     public void goToEditContact(int i) {
         click(By.xpath("//img[@alt='Edit']"));
     }
+
+    public void goToEditContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
@@ -79,8 +86,9 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<contactData> list() {
-        List<contactData> contacts = new ArrayList<contactData>();
+
+    public Set<contactData> all() {
+        Set<contactData> contacts = new HashSet<contactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement e : elements) {
             String firstname = e.findElement(By.xpath(".//td[3]")).getText();

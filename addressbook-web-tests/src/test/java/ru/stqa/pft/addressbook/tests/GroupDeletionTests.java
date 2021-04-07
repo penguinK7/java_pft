@@ -7,13 +7,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.groupData;
 
-import java.util.List;
+import java.util.Set;
 
 public class GroupDeletionTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions(){
         app.goTo().groupPage();
-        if(app.group().list().size() == 0){  //создание группы, если ее не было
+        if(app.group().all().size() == 0){  //создание группы, если ее не было
             app.group().create(new groupData().withName("test1"));
         }
     }
@@ -22,13 +22,14 @@ public class GroupDeletionTests extends TestBase {
     public void testGroupDeletion() throws Exception {
 
 
-        List<groupData> before = app.group().list(); //подсчет количества групп до создания
-        int index = before.size()-1;
-        app.group().delete(index);
-        List<groupData> after = app.group().list();
+        Set<groupData> before = app.group().all(); //подсчет количества групп до создания
+        groupData deletedGroup = before.iterator().next();
+      //  int index = before.size()-1;
+        app.group().delete(deletedGroup);
+        Set<groupData> after = app.group().all();
         Assert.assertEquals(after.size(), before.size()-1);
 
-        before.remove(index); //удалили группу из списка и проверили
+        before.remove(deletedGroup); //удалили группу из списка и проверили
         Assert.assertEquals(before,after);
 
     }
