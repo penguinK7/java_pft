@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.contactData;
 
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,8 +46,14 @@ public class ContactHelper extends HelperBase{
 
 
     }
+    public void delete(contactData contact) {
+        selectContactById(contact.getId());
+        deleteContact();
+        contactCache = null;
 
-    public void deleteSelectedContact(){
+    }
+    private Contacts contactCache = null;
+    public void deleteContact(){
         click(By.xpath("//input[@value='Delete']"));
     }
     public void modifyContact(int index, contactData contact) {
@@ -86,9 +92,11 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-
-    public Set<contactData> all() {
-        Set<contactData> contacts = new HashSet<contactData>();
+    private void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();;
+    }
+    public Contacts contactAll() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement e : elements) {
             String firstname = e.findElement(By.xpath(".//td[3]")).getText();
