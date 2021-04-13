@@ -20,7 +20,7 @@ public class ContactModificationTests extends TestBase{
                     .withFirstname("firstName")
                     .withLastname("lastName")
                     .withAddress("address")
-                    .withMobile("123456")
+                    .withMobilephone("79201111111")
                     .withEmail("email@address.com")
                     .withGroup("test"));
             app.goTo().homePage();
@@ -38,7 +38,7 @@ public class ContactModificationTests extends TestBase{
                 .withFirstname("firstName")
                 .withLastname("lastName")
                 .withAddress("address")
-                .withMobile("123456")
+                .withMobilephone("79201111111")
                 .withEmail("email@address.com");
         app.contact().modifyContact(index, contact);
 

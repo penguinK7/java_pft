@@ -6,7 +6,9 @@ public class contactData {
     private  String firstname;
     private  String lastname;
     private  String address;
-    private  String mobile;
+    private String homephone;
+    private String mobilephone;
+    private String workphone;
     private  String email;
     private String group; //добавили возможность выбора группы при создании контакта
     private int id = Integer.MAX_VALUE;;
@@ -34,8 +36,18 @@ public class contactData {
         return this;
     }
 
-    public contactData withMobile(String mobile) {
-        this.mobile = mobile;
+    public contactData withMobilephone(String mobilephone) {
+        this.mobilephone = mobilephone;
+        return this;
+    }
+
+    public contactData withHomephone(String homephone) {
+        this.homephone = homephone;
+        return this;
+    }
+
+    public contactData withWorkphone(String workphone) {
+        this.workphone = workphone;
         return this;
     }
 
@@ -62,9 +74,10 @@ public class contactData {
         return address;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getMobilephone() {
+        return mobilephone;
     }
+
 
     public String getEmail() {
         return email;
