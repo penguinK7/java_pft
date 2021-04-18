@@ -1,7 +1,5 @@
 package ru.stqa.pft.addressbook.model;
 
-import ru.stqa.pft.addressbook.appmanager.HelperBase;
-
 public class contactData {
     private  String firstname;
     private  String lastname;
@@ -9,6 +7,7 @@ public class contactData {
     private String homephone;
     private String mobilephone;
     private String workphone;
+    private String allPhones;
     private  String email;
     private String group; //добавили возможность выбора группы при создании контакта
     private int id = Integer.MAX_VALUE;;
@@ -51,6 +50,12 @@ public class contactData {
         return this;
     }
 
+    public contactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+
     public contactData withEmail(String email) {
         this.email = email;
         return this;
@@ -77,7 +82,16 @@ public class contactData {
     public String getMobilephone() {
         return mobilephone;
     }
+    public String getHomephone() {
+        return homephone;
+    }
+    public String getWorkphone() {
+        return workphone;
+    }
+    public String getAllPhones() {
+        return allPhones;
 
+    }
 
     public String getEmail() {
         return email;
