@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
     private  String firstname;
     private  String lastname;
@@ -14,6 +16,16 @@ public class ContactData {
     private  String allEmails;
     private String group; //добавили возможность выбора группы при создании контакта
     private int id = Integer.MAX_VALUE;;
+    private File photo;
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
 
     public String getEmail2() {
         return email2;
