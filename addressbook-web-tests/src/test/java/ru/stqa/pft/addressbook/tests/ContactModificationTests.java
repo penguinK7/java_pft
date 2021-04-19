@@ -3,7 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.contactData;
+import ru.stqa.pft.addressbook.model.ContactData;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import ru.stqa.pft.addressbook.model.Contacts;
@@ -17,7 +17,7 @@ public class ContactModificationTests extends TestBase {
         app.goTo().homePage();
         if (app.contact().contactAll().size() == 0) {  //создание контакта, если его не было
             app.goTo().goToContactCreation();
-            app.contact().create(new contactData()
+            app.contact().create(new ContactData()
                     .withFirstname("firstName")
                     .withLastname("lastName")
                     .withAddress("address")
@@ -33,8 +33,8 @@ public class ContactModificationTests extends TestBase {
 
         Contacts before = app.contact().contactAll(); //подсчет количества контактов до создания
 
-        contactData modifiedContact = before.iterator().next();
-        contactData contact = new contactData()
+        ContactData modifiedContact = before.iterator().next();
+        ContactData contact = new ContactData()
                 .withId(modifiedContact.getId())
                 .withFirstname("firstName")
                 .withLastname("lastName")

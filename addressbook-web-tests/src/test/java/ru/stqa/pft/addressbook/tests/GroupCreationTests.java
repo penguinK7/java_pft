@@ -2,7 +2,7 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.Groups;
-import ru.stqa.pft.addressbook.model.groupData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,7 +15,7 @@ public class GroupCreationTests extends TestBase {
 
         app.goTo().groupPage();
         Groups before = app.group().all(); //подсчет количества групп до создания
-        groupData group = new groupData().withName("test1");
+        GroupData group = new GroupData().withName("test1");
         app.group().create(group);
         assertThat(app.group().count(), equalTo(before.size() + 1));
         Groups after = app.group().all();
@@ -30,7 +30,7 @@ public class GroupCreationTests extends TestBase {
 
         app.goTo().groupPage();
         Groups before = app.group().all(); //подсчет количества групп до создания
-        groupData group = new groupData().withName("test1'");//создаем тест с недопустимым символом '
+        GroupData group = new GroupData().withName("test1'");//создаем тест с недопустимым символом '
         app.group().create(group);
         assertThat(app.group().count(), equalTo(before.size()));
         Groups after = app.group().all();

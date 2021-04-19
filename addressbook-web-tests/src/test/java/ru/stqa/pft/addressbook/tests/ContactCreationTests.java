@@ -3,13 +3,11 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.contactData;
-
-import java.util.Set;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
+
 
 public class ContactCreationTests extends TestBase {
 
@@ -21,7 +19,7 @@ public class ContactCreationTests extends TestBase {
 
         app.goTo().goToContactCreation();
 
-        contactData contact = new contactData()
+        ContactData contact = new ContactData()
                 .withFirstname("firstName")
                 .withLastname("lastName")
                 .withAddress("address")

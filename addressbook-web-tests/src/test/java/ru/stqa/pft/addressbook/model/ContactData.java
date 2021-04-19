@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
-public class contactData {
+public class ContactData {
     private  String firstname;
     private  String lastname;
     private  String address;
@@ -9,59 +9,88 @@ public class contactData {
     private String workphone;
     private String allPhones;
     private  String email;
+    private  String email2;
+    private  String email3;
+    private  String allEmails;
     private String group; //добавили возможность выбора группы при создании контакта
     private int id = Integer.MAX_VALUE;;
 
+    public String getEmail2() {
+        return email2;
+    }
+
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
 
     public int getId() {        return id;
     }
-    public contactData withId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
         return this;
     }
 
-    public contactData withFirstname(String firstname) {
+    public ContactData withFirstname(String firstname) {
         this.firstname = firstname;
         return this;
     }
 
-    public contactData withLastname(String lastname) {
+    public ContactData withLastname(String lastname) {
         this.lastname = lastname;
         return this;
     }
 
-    public contactData withAddress(String address) {
+    public ContactData withAddress(String address) {
         this.address = address;
         return this;
     }
 
-    public contactData withMobilephone(String mobilephone) {
+    public ContactData withMobilephone(String mobilephone) {
         this.mobilephone = mobilephone;
         return this;
     }
 
-    public contactData withHomephone(String homephone) {
+    public ContactData withHomephone(String homephone) {
         this.homephone = homephone;
         return this;
     }
 
-    public contactData withWorkphone(String workphone) {
+    public ContactData withWorkphone(String workphone) {
         this.workphone = workphone;
         return this;
     }
 
-    public contactData withAllPhones(String allPhones) {
+    public ContactData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
         return this;
     }
 
 
-    public contactData withEmail(String email) {
+    public ContactData withEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public contactData withGroup(String group) {
+    public ContactData withGroup(String group) {
         this.group = group;
         return this;
     }
@@ -114,7 +143,7 @@ public class contactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        contactData that = (contactData) o;
+        ContactData that = (ContactData) o;
 
         if (id != that.id) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;

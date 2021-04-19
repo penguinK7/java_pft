@@ -3,13 +3,14 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.Contacts;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
-public class ContactDeletionTests extends TestBase {
+public class ContactAddressTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().homePage();
@@ -19,32 +20,30 @@ public class ContactDeletionTests extends TestBase {
                     .withFirstname("firstName")
                     .withLastname("lastName")
                     .withAddress("address")
+                    .withHomephone("55555")
                     .withMobilephone("79201111111")
                     .withEmail("email@address.com")
                     .withGroup("test"));
             app.goTo().homePage();
         }
     }
-
     @Test()
-    public void testContactDeletion() {
-
-       Contacts before = app.contact().contactAll();
-
-        ContactData deletedContact = before.iterator().next();
-        app.contact().delete(deletedContact);
-        app.goTo().acceptAlert();
+    public void testContactAddress(){
         app.goTo().homePage();
-        assertThat(app.contact().count(), equalTo(before.size()-1));
-        Contacts after = app.contact().contactAll();
+        ContactData contact = app.contact().contactAll().iterator().next();
+        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
+        assertThat(contact.getAddress(), equalTo(mergeAddress(contactInfoFromEditForm)));
 
-
-
-        assertThat(after, equalTo(before.without(deletedContact)));
     }
+    private String mergeAddress(ContactData contact) {
+        return  Arrays.asList(contact.getAddress())
+                .stream().filter((s) -> ! s.equals(""))
+                .map(ContactAddressTests::cleaned)
+                .collect(Collectors.joining("\n"));
 
-
-
-
+    }
+    public static String cleaned(String address){
+        return address.replaceAll("\\s","").replaceAll("[()]","");
+    }
 }
