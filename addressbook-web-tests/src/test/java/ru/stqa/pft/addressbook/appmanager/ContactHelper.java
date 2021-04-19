@@ -63,8 +63,9 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//input[@value='Delete']"));
     }
 
-    public void modifyContact(int index, ContactData contact) {
-        goToEditContact(index);
+    public void modifyContact(ContactData contact) {
+       // goToEditContact(index);
+        editContactById(contact.getId());
         fillContactForm(contact, false);
         updateContact();
         contactCache = null;
@@ -95,6 +96,9 @@ public class ContactHelper extends HelperBase {
 
     public void goToEditContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+    public void editContactById(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     }
 
     public boolean isThereAContact() {
