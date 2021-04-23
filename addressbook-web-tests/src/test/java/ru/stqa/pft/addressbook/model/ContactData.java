@@ -1,7 +1,10 @@
 package ru.stqa.pft.addressbook.model;
 
-import java.io.File;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import java.io.File;
+@XStreamAlias("contacts")
 public class ContactData {
     private  String firstname;
     private  String lastname;
@@ -15,6 +18,7 @@ public class ContactData {
     private  String email3;
     private  String allEmails;
     private String group; //добавили возможность выбора группы при создании контакта
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;;
     private File photo;
 
