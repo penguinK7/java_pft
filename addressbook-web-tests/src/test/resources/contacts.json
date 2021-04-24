@@ -1,5 +1,26 @@
 [
-  {},
-  {},
-  {}
+  {
+    "firstname": "firstname 0",
+    "lastname": "lastname 0",
+    "address": "address 0",
+    "mobilephone": "123123 0",
+    "email": "0email111",
+    "group": "test 0"
+  },
+  {
+    "firstname": "firstname 1",
+    "lastname": "lastname 1",
+    "address": "address 1",
+    "mobilephone": "123123 1",
+    "email": "1email111",
+    "group": "test 1"
+  },
+  {
+    "firstname": "firstname 2",
+    "lastname": "lastname 2",
+    "address": "address 2",
+    "mobilephone": "123123 2",
+    "email": "2email111",
+    "group": "test 2"
+  }
 ]

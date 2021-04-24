@@ -79,9 +79,9 @@ public class ContactDataGenerator {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstname(String.format("firstname %s", i)).withLastname(String.format("lastname %s", i))
-                    .withAddress(String.format("address %s", i)).withHomephone(String.format("88005553535 %s", i)).withMobilephone(String.format("123123 %s", i)).withWorkphone(String.format("3452335 %s", i))
-                    .withEmail(String.format("email111 %s", i)).withEmail2(String.format("email222 %s", i)).withEmail3(String.format("email333 %s", i))
-                    .withAddress(String.format("address %s", i)).withGroup(String.format("test%s", i)).withPhoto(new File(String.format("src/test/resources/stru.png"))));
+                    .withAddress(String.format("address %s", i)).withMobilephone(String.format("123123 %s", i))
+                    .withEmail(String.format("%semail111", i))
+                    .withAddress(String.format("address %s", i)).withGroup(String.format("test %s", i)));
         }
         return contacts;
     }

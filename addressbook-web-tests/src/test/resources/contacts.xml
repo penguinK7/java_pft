@@ -3,39 +3,24 @@
     <firstname>firstname 0</firstname>
     <lastname>lastname 0</lastname>
     <address>address 0</address>
-    <homephone>88005553535 0</homephone>
     <mobilephone>123123 0</mobilephone>
-    <workphone>3452335 0</workphone>
-    <email>email111 0</email>
-    <email2>email222 0</email2>
-    <email3>email333 0</email3>
+    <email>0email111</email>
     <group>test0</group>
-    <photo>src\test\resources\stru.png</photo>
   </contacts>
   <contacts>
     <firstname>firstname 1</firstname>
     <lastname>lastname 1</lastname>
     <address>address 1</address>
-    <homephone>88005553535 1</homephone>
     <mobilephone>123123 1</mobilephone>
-    <workphone>3452335 1</workphone>
-    <email>email111 1</email>
-    <email2>email222 1</email2>
-    <email3>email333 1</email3>
+    <email>1email111</email>
     <group>test1</group>
-    <photo>src\test\resources\stru.png</photo>
   </contacts>
   <contacts>
     <firstname>firstname 2</firstname>
     <lastname>lastname 2</lastname>
     <address>address 2</address>
-    <homephone>88005553535 2</homephone>
     <mobilephone>123123 2</mobilephone>
-    <workphone>3452335 2</workphone>
-    <email>email111 2</email>
-    <email2>email222 2</email2>
-    <email3>email333 2</email3>
+    <email>2email111</email>
     <group>test2</group>
-    <photo>src\test\resources\stru.png</photo>
   </contacts>
 </list>

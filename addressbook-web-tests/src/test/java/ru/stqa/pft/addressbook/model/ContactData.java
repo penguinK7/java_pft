@@ -1,25 +1,39 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import java.io.File;
 @XStreamAlias("contacts")
 public class ContactData {
+    @Expose
     private  String firstname;
+    @Expose
     private  String lastname;
+    @Expose
     private  String address;
+    @Expose
     private String homephone;
+    @Expose
     private String mobilephone;
+    @Expose
     private String workphone;
+    @Expose
     private String allPhones;
+    @Expose
     private  String email;
+    @Expose
     private  String email2;
+    @Expose
     private  String email3;
+
     private  String allEmails;
+    @Expose
     private String group; //добавили возможность выбора группы при создании контакта
     @XStreamOmitField
     private int id = Integer.MAX_VALUE;;
+    @Expose
     private File photo;
 
     public File getPhoto() {
