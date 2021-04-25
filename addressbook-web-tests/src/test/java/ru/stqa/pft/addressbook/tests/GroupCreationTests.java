@@ -55,6 +55,7 @@ public class GroupCreationTests extends TestBase {
     @Test(dataProvider = "validGroupsFromJson")
     public void testGroupCreation(GroupData group) throws Exception {
 
+
         app.goTo().groupPage();
         Groups before = app.group().all(); //подсчет количества групп до создания
         app.group().create(group);
