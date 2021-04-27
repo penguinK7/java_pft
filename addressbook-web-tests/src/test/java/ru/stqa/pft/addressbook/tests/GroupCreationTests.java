@@ -57,10 +57,10 @@ public class GroupCreationTests extends TestBase {
 
 
         app.goTo().groupPage();
-        Groups before = app.group().all(); //подсчет количества групп до создания
+        Groups before = app.db().groups(); //подсчет количества групп до создания
         app.group().create(group);
         assertThat(app.group().count(), equalTo(before.size() + 1));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
 
 
         assertThat(after, equalTo(

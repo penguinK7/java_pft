@@ -43,7 +43,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("email"), contactData.getEmail());
       //  type(By.name("email2"), contactData.getEmail());
      //   type(By.name("email3"), contactData.getEmail());
-        attach(By.name("photo"), contactData.getPhoto());
+     //   attach(By.name("photo"), contactData.getPhoto());
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());

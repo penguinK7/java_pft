@@ -54,6 +54,7 @@ public class ContactData {
     @Column(name = "id")
     private int id = Integer.MAX_VALUE;;
     @Expose
+    @Transient
     @Column(name = "photo")
     @Type(type = "text")
     private String photo;
