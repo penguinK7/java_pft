@@ -9,6 +9,7 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -41,12 +42,16 @@ public class ContactHelper extends HelperBase {
         type(By.name("mobile"), contactData.getMobilephone());
         type(By.name("work"), contactData.getWorkphone());
         type(By.name("email"), contactData.getEmail());
-      //  type(By.name("email2"), contactData.getEmail());
-     //   type(By.name("email3"), contactData.getEmail());
-     //   attach(By.name("photo"), contactData.getPhoto());
+        type(By.name("email2"), contactData.getEmail());
+        type(By.name("email3"), contactData.getEmail());
+       attach(By.name("photo"), contactData.getPhoto());
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            if (contactData.getGroups().size() > 0) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group")))
+                        .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -78,10 +83,11 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("(//input[@name='update'])[2]"));
     }
 
-    public void create(ContactData contact) {
+    public void create(ContactData contact, boolean b) throws IOException {
         fillContactForm(contact, true);
         submitContactCreation();
         contactCache = null;
+
     }
 
     public void homePage() {

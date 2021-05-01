@@ -83,6 +83,7 @@ public class GroupCreationTests extends TestBase {
         assertThat(after, equalTo(before));
 
         verifyGroupListInUI();
+        //-DverifyUI=true   написать в edit configurations  vm options
     }
 
 

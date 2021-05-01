@@ -5,13 +5,15 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.io.IOException;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class ContactDeletionTests extends TestBase {
     @BeforeMethod
-    public void ensurePreconditions() {
+    public void ensurePreconditions() throws IOException {
         app.goTo().homePage();
         if (app.db().contacts().size() == 0) {  //создание контакта, если его не было
            app.goTo().goToContactCreation();
@@ -21,7 +23,8 @@ public class ContactDeletionTests extends TestBase {
                     .withAddress("address")
                     .withMobilephone("79201111111")
                     .withEmail("email@address.com")
-                    .withGroup("test"));
+                  //  .withGroup("test")
+            , true);
             app.goTo().homePage();
         }
     }

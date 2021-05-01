@@ -7,6 +7,7 @@ import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 
 import java.io.BufferedReader;
@@ -57,16 +58,21 @@ public class ContactCreationTests extends TestBase {
         }
 
     }
+   // dataProvider = "validContactsFromJson"
+    @Test()
+    public void testContactCreation() throws Exception {
 
-    @Test(dataProvider = "validContactsFromJson")
-    public void testContactCreation(ContactData contact) throws Exception {
-        Contacts before = app.db().contacts();
+        Groups groups = app.db().groups();
+        File photo = new File("src/test/resources/stru.png");
+        ContactData contact = new ContactData().withFirstname("testName")
+                .withLastname("testSurname").withPhoto(photo).inGroup(groups.iterator().next());
 
-
-        app.goTo().goToContactCreation();
-        app.contact().create(contact);
         app.goTo().homePage();
-        assertThat(app.contact().count(), equalTo(before.size() + 1));
+        Contacts before = app.db().contacts();
+        app.goTo().goToContactCreation();
+        app.contact().create(contact, true);
+        app.goTo().homePage();
+       assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.db().contacts();
 
 

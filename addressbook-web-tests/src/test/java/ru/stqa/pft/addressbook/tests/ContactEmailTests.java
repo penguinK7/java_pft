@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 //тест на сравнение имейлов на странице со всеми контактами и на странице редактирования контакта
 public class ContactEmailTests extends TestBase{
     @BeforeMethod
-    public void ensurePreconditions() {
+    public void ensurePreconditions() throws IOException {
         app.goTo().homePage();
         if (app.contact().contactAll().size() == 0) {  //создание контакта, если его не было
             app.goTo().goToContactCreation();
@@ -24,7 +25,8 @@ public class ContactEmailTests extends TestBase{
                     .withHomephone("55555")
                     .withMobilephone("79201111111")
                     .withEmail("email@address.com")
-                    .withGroup("test"));
+                   // .withGroup("test")
+            , true);
             app.goTo().homePage();
         }
     }
