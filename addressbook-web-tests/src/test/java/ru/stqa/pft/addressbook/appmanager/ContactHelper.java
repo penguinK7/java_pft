@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 
 import java.io.IOException;
@@ -118,10 +119,28 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    private void selectContactById(int id) {
+    public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
+
+    public void selectGroupToAdd(GroupData groupName) {
+        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(groupName.getName());
+    }
+
+    public void addInGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        selectGroupToAdd(group);
+        add();
+        goToGoup();
+        contactCache = null;
+    }
+    public void add(){click(By.xpath("(//input[@name='add'])"));}
+    public void groupFilter(GroupData group){
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());;
+    }
+
+    public void goToGoup(){wd.findElement(By.partialLinkText("group page")).click();}
     private Contacts contactCache = null;
 
 
@@ -174,4 +193,48 @@ public class ContactHelper extends HelperBase {
         //  wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']",id))).click();
     }
 
+
+
+    public void selectContactCheckbox(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public void selectContactCheckboxById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
+    public void addContactToGroup(ContactData contactData, GroupData groupData) {
+
+        selectContactCheckboxById(contactData.getId());
+        selectGroupFromListToAdd(groupData.getId());
+        addToGroupButton();
+        goToGroupPageAfterAddingRemovingContact();
+        contactCache = null;
+    }
+
+    private void addToGroupButton() {
+        wd.findElement(By.name("add")).click();
+    }
+
+    public void goToGroupPageAfterAddingRemovingContact() {
+        wd.findElement(By.partialLinkText("group page")).click();
+        //wd.findElement(By.cssSelector(String.format("a[href='./?group=%s']", id))).click();
+    }
+
+    public void selectGroupFromListToAdd(int groupId) {
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(groupId));
+    }
+    public void removeContactFromGroup(ContactData contact, GroupData groupData) {
+        selectContactCheckboxById(contact.getId());
+        removeFromGroupButton();
+        goToGroupPageAfterAddingRemovingContact();
+        contactCache = null;
+    }
+
+    public void selectGroupFromList(int groupId) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(groupId));
+    }
+    public void removeFromGroupButton() {
+        wd.findElement(By.name("remove")).click();
+    }
 }

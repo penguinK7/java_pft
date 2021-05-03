@@ -24,7 +24,7 @@ public class ContactAddressTests extends TestBase {
                     .withHomephone("55555")
                     .withMobilephone("79201111111")
                     .withEmail("email@address.com")
-                  //  .withGroup("test")
+                   // .withGroup("test")
             , true);
             app.goTo().homePage();
         }
