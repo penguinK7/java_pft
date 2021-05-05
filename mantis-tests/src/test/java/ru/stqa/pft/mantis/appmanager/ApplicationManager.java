@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import ru.stqa.pft.mantis.appmanager.HttpSession;
 
 public class ApplicationManager {
     private final Properties properties;
@@ -59,6 +60,12 @@ public class ApplicationManager {
     }
 
 
+    public HttpSession newSession(){
+        return new HttpSession(this);
+    }
 
+    public String getProperty(String key) {
+        return properties.getProperty(key);
+    }
 
 }
