@@ -19,10 +19,11 @@ public class ApplicationManager {
     private final Properties properties;
     private WebDriver wd;
     private RegistrationHelper registrationHelper;
-        private String browser;
+    private FtpHelper ftp;
+    private String browser;
 
 
-    public ApplicationManager(String browser)  {
+    public ApplicationManager(String browser) {
         this.browser = browser;
         properties = new Properties();
     }
@@ -30,8 +31,6 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
-        
 
 
     }
@@ -48,19 +47,28 @@ public class ApplicationManager {
     }
 
 
-    public HttpSession newSession(){
+    public HttpSession newSession() {
         return new HttpSession(this);
     }
 
     public String getProperty(String key) {
         return properties.getProperty(key);
     }
+
     public RegistrationHelper registration() {
         if (registrationHelper == null) {
             registrationHelper = new RegistrationHelper(this);
         }
         return registrationHelper;
     }
+
+    public FtpHelper ftp() {
+        if (ftp == null) {
+            ftp = new FtpHelper(this);
+        }
+        return ftp;
+    }
+
     public WebDriver getDriver() {
         if (wd == null) {
             if (browser.equals(BrowserType.FIREFOX)) {
