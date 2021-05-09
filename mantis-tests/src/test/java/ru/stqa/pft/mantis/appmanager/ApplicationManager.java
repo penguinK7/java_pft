@@ -7,20 +7,23 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
 import ru.stqa.pft.mantis.appmanager.HttpSession;
 
 public class ApplicationManager {
+    private String browser;
     private final Properties properties;
     private WebDriver wd;
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
-    private String browser;
+
+    private MailHelper mailHelper;
+    private Object MailHelper;
 
 
     public ApplicationManager(String browser) {
@@ -83,5 +86,11 @@ public class ApplicationManager {
             wd.get(properties.getProperty("web.baseUrl"));
         }
         return wd;
+    }
+    public MailHelper mail() {
+        if(MailHelper == null) {
+            mailHelper = new MailHelper(this);
+        }
+        return mailHelper;
     }
 }
