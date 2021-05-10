@@ -1,9 +1,8 @@
 package ru.stqa.pft.mantis.appmanager;
 
-
 import org.openqa.selenium.By;
 
-public class RegistrationHelper extends HelperBase {
+public class RegistrationHelper extends HelperBase{
 
     public RegistrationHelper(ApplicationManager app) {
         super(app);

@@ -1,29 +1,25 @@
 package ru.stqa.pft.mantis.appmanager;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import ru.stqa.pft.mantis.appmanager.HttpSession;
 
 public class ApplicationManager {
+
     private String browser;
     private final Properties properties;
     private WebDriver wd;
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
-
     private MailHelper mailHelper;
-    private Object MailHelper;
 
 
     public ApplicationManager(String browser) {
@@ -31,17 +27,14 @@ public class ApplicationManager {
         properties = new Properties();
     }
 
+    public String getProperty(String key) {
+        return properties.getProperty(key);
+    }
+
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
-
     }
-
-    public void logout() {
-        wd.findElement(By.linkText("Logout")).click();
-    }
-
 
     public void stop() {
         if (wd != null) {
@@ -49,13 +42,8 @@ public class ApplicationManager {
         }
     }
 
-
     public HttpSession newSession() {
         return new HttpSession(this);
-    }
-
-    public String getProperty(String key) {
-        return properties.getProperty(key);
     }
 
     public RegistrationHelper registration() {
@@ -87,8 +75,8 @@ public class ApplicationManager {
         }
         return wd;
     }
-    public MailHelper mail() {
-        if(MailHelper == null) {
+    public MailHelper mail(){
+        if (mailHelper == null){
             mailHelper = new MailHelper(this);
         }
         return mailHelper;
