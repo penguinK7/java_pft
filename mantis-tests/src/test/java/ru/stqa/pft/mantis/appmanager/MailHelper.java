@@ -1,5 +1,6 @@
 package ru.stqa.pft.mantis.appmanager;
 
+
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 import ru.stqa.pft.mantis.model.MailMessage;
@@ -11,33 +12,37 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MailHelper {
+
     private ApplicationManager app;
     private final Wiser wiser;
 
     public MailHelper(ApplicationManager app) {
         this.app = app;
-        wiser = new Wiser();
+        wiser = new Wiser();   // при инициализации создается объект типа Wiser; Wiser - это и есть почтовый сервер, но н пока не запущен. Чтобы его запустить нужно вызвать метод start()
     }
 
     public List<MailMessage> waitForMail(int count, long timeout) throws MessagingException, IOException {
-        long start = System.currentTimeMillis();
-        while (System.currentTimeMillis() < start + timeout) {
-            if (wiser.getMessages().size() >= count) {
-                return wiser.getMessages().stream().map((m) -> toModelMail(m)).collect(Collectors.toList());
+        // count - это количество писем, которые должны прийти; timeout - задает время ожидания
+        long start = System.currentTimeMillis();  // запоминаем текущее время
+        while (System.currentTimeMillis() < start + timeout) {    // проверяем, что новое текущее время не превышает момент старта в timeout (время еще не истекло)
+            if (wiser.getMessages().size() >= count) {    // проверяем, что почты пришло достаточно много, значит ожидание можно прекращать
+                return wiser.getMessages().stream().map((m) -> toModelMail(m)).collect(Collectors.toList());  // прекращаем ожидание: преобразование реальных объектов в модельные (не зависят от деталей реализации)
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10000);// подождать 1000 милесекунд
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        throw new Error("No mail :(");
+        throw new Error("No mail:("); // если почта не пришла в течение заданного времени
     }
-    public static MailMessage toModelMail(WiserMessage m) {
+
+    public static MailMessage toModelMail(WiserMessage m) { // Преобразование реальных объектов в наши модельные. Mantis присылает письма в обычном текстовом формате (нам это известно); он отправляет два висьма: администратору о регистрации нового юзера и юзеру со ссылкой о продолжении регистрации
         try {
             MimeMessage mm = m.getMimeMessage();
-            return new MailMessage(mm.getAllRecipients()[0].toString(), (String) mm.getContent());
-        } catch (MessagingException e) {
+            MailMessage mailMessage = new MailMessage(mm.getAllRecipients()[0].toString(), (String) mm.getContent());
+            return mailMessage;  // берем первого получателя из списка (мы знаем, что он там один)
+        } catch (MessagingException e) { //перехват ошибок при чтении письма
             e.printStackTrace();
             return null;
         } catch (IOException e) {
@@ -46,11 +51,11 @@ public class MailHelper {
         }
     }
 
-    public void start() {
+    public void start() {    // запуск почтового сервера
         wiser.start();
     }
-    public void stop() {
+
+    public void stop() {    // остановка почтового сервера
         wiser.stop();
     }
-
 }
