@@ -4,7 +4,8 @@
     <test name="Mantis">
         <classes>
             <class name="ru.stqa.pft.mantis.tests.LoginTests"/>
-            <class name="ru.stqa.pft.mantis.tests.RegistrationTests"/>
+            <class name="ru.stqa.pft.mantis.tests.RegistrationTest"/>
+            <class name="ru.stqa.pft.mantis.tests.ChangePasswordForUser"/>
         </classes>
     </test>
 </suite>
